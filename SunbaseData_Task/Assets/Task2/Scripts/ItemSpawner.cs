@@ -45,6 +45,7 @@ public class ItemSpawner : MonoBehaviour
             }
             GameObject go = Instantiate(circlePrefab, spawnPoints[randIndex].position, Quaternion.identity);
             spawnPointDict[spawnPoints[randIndex]] = true;
+            go.transform.SetParent(transform);
 
             itemList.Add(go);
         }

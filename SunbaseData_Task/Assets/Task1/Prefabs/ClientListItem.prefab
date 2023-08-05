@@ -169,8 +169,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1486563856060231671}
   - {fileID: 5713097632572148656}
+  - {fileID: 1486563856060231671}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -255,8 +255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98eac406829b3d742bce4b55d644940a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idText: {fileID: 6387821958746777218}
   labelText: {fileID: 5925178955016208347}
+  pointsText: {fileID: 6387821958746777218}
   rectTransform: {fileID: 3526690746293721456}
   scaleDuration: 0.2
 --- !u!114 &1395754810800091559
@@ -573,7 +573,7 @@ GameObject:
   - component: {fileID: 5943978383182573342}
   - component: {fileID: 790282118469708497}
   m_Layer: 5
-  m_Name: ID
+  m_Name: Points
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

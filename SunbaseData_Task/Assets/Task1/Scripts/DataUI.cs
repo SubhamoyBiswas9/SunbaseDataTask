@@ -33,14 +33,38 @@ public class DataUI : MonoBehaviour
 
     public void GenerateList(JsonData data)
     {
-        foreach(var item in data.clients)
+        StartCoroutine(GenerateItemList(data));
+        
+    }
+
+    IEnumerator GenerateItemList(JsonData data)
+    {
+        foreach (var item in data.clients)
         {
             ClientItem clientItem = Instantiate(clientItemPrefab, clientListContent);
-            clientItem.Initialize(item.id, item.label, item.isManager);
+
+            Details clientDetail = new Details();
+            switch (item.id)
+            {
+                case 1:
+                    clientDetail = data.data.detail1;
+                    break;
+                case 2:
+                    clientDetail = data.data.detail2;
+                    break;
+                case 3:
+                    clientDetail = data.data.detail3;
+                    break;
+                default:
+                    clientDetail = null;
+                    break;
+            }
+            clientItem.Initialize(item, clientDetail);
 
             clientItemList.Add(clientItem);
+
+            yield return new WaitForSeconds(.1f);
         }
-        
     }
 
     public void OnDropdownValueChanged(int val)
@@ -75,9 +99,12 @@ public class DataUI : MonoBehaviour
         }
     }
 
-    void OpenPopup(int id, string label, bool isManager)
+    void OpenPopup(string name, string points, string address)
     {
         popupPanel.SetActive(true);
-        popupDataUI.AssignData(id, label, isManager);
+        if (string.IsNullOrEmpty(name))
+            popupDataUI.AssignData();
+        else
+            popupDataUI.AssignData(name, points, address);
     }
 }

@@ -6,8 +6,8 @@ using DG.Tweening;
 
 public class ClientItem : MonoBehaviour
 {
-    [SerializeField] TMP_Text idText;
     [SerializeField] TMP_Text labelText;
+    [SerializeField] TMP_Text pointsText;
 
     [SerializeField] RectTransform rectTransform;
     [SerializeField] float scaleDuration = .2f;
@@ -15,7 +15,10 @@ public class ClientItem : MonoBehaviour
     bool isManager; public bool _isManager { get => isManager; }
 
     int id;
+    int points;
     string label;
+    string clientName;
+    string address;
 
     private void OnEnable()
     {
@@ -23,17 +26,26 @@ public class ClientItem : MonoBehaviour
         rectTransform.DOScale(1, scaleDuration);
     }
 
-    public void Initialize(int id, string label,bool isManager)
+    public void Initialize(ClientData clientData, Details clientDetails)
     {
-        this.id = id;
-        this.label = label;
-        idText.text = id.ToString();
-        labelText.text = label;
-        this.isManager = isManager;
+        this.id = clientData.id;        
+        this.label = clientData.label;
+        this.isManager = clientData.isManager;
+        labelText.text = clientData.label;
+
+        if (clientDetails == null)
+            pointsText.text = "N/A";
+        else
+        {
+            this.clientName = clientDetails.name;
+            this.points = clientDetails.points;
+            this.address = clientDetails.address;
+            pointsText.text = clientDetails.points.ToString();
+        }
     }
 
     public void OnClickItem()
     {
-        EventHandler.OnItemClicked?.Invoke(id, label, isManager);
+        EventHandler.OnItemClicked?.Invoke(clientName, points.ToString(), address);
     }
 }

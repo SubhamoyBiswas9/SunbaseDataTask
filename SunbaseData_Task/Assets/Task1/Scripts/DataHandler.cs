@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using Newtonsoft.Json;
 
 public class DataHandler : MonoBehaviour
 {
@@ -28,7 +29,9 @@ public class DataHandler : MonoBehaviour
             string responseData = request.downloadHandler.text;
             Debug.Log("API Response: " + request.downloadHandler.text);
 
-            JsonData data = JsonUtility.FromJson<JsonData>(request.downloadHandler.text);
+            //JsonData data = JsonUtility.FromJson<JsonData>(request.downloadHandler.text);
+
+            JsonData data = JsonConvert.DeserializeObject<JsonData>(request.downloadHandler.text);
 
             EventHandler.OnDataFetched?.Invoke(data);
         }
@@ -38,20 +41,30 @@ public class DataHandler : MonoBehaviour
 public class JsonData
 {
     public List<ClientData> clients;
-    List<Data> data;
+    public Data data;
     string label;
 }
-[System.Serializable]
+
 public class ClientData
 {
     public bool isManager;
     public int id;
     public string label;
 }
-
-class Data
+[System.Serializable]
+public class Data
 {
-    string address;
-    string name;
-    int points;
+    [JsonProperty("1")]
+    public Details detail1;
+    [JsonProperty("2")]
+    public Details detail2;
+    [JsonProperty("3")]
+    public Details detail3;
+}
+
+public class Details
+{
+    public string address;
+    public string name;
+    public int points;
 }

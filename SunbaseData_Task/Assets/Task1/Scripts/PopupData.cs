@@ -6,9 +6,9 @@ using DG.Tweening;
 
 public class PopupData : MonoBehaviour
 {
-    [SerializeField] TMP_Text labelText;
-    [SerializeField] TMP_Text idText;
-    [SerializeField] TMP_Text isManagerText;
+    [SerializeField] TMP_Text nameText;
+    [SerializeField] TMP_Text pointsText;
+    [SerializeField] TMP_Text addressText;
 
     [SerializeField] RectTransform rectTransform;
 
@@ -20,10 +20,10 @@ public class PopupData : MonoBehaviour
         rectTransform.DOScale(1, scaleDuration);
     }
 
-    public void AssignData(int id, string label, bool isManager)
+    public void AssignData(string name = "N/A", string points = "N/A", string address = "N/A")
     {
-        labelText.text = "Label : " + label;
-        idText.text = "ID : "+ id.ToString();
-        isManagerText.text = "IsManager : " + isManager.ToString();
+        nameText.text = "Name : " + name;
+        pointsText.text = "Points : " + points;
+        addressText.text = "Address : " + address;
     }
 }
